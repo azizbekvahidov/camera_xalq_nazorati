@@ -3,18 +3,23 @@ import '../widget/custom_appBar.dart';
 import '../widget/default_button.dart';
 import '../widget/default_input.dart';
 import '../widget/main_text.dart';
-
+import "camera_page.dart";
+ 
 class PasRecognizeScreen extends StatefulWidget {
   static const routeName = "/register-pass-recognize";
   @override
   _PasRecognizeScreenState createState() => _PasRecognizeScreenState();
 }
-
+ 
 class _PasRecognizeScreenState extends State<PasRecognizeScreen> {
   var seriesController = TextEditingController();
   var pnflController = TextEditingController();
   bool _value = false;
-
+ 
+  void dispose() {
+    super.dispose();
+  }
+ 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -41,7 +46,7 @@ class _PasRecognizeScreenState extends State<PasRecognizeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MainText("ПНФЛ"),
+                    MainText("ПИНФЛ"),
                     Container(
                       padding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -64,41 +69,60 @@ class _PasRecognizeScreenState extends State<PasRecognizeScreen> {
                                     mediaQuery.padding.left -
                                     mediaQuery.padding.right) *
                                 0.77,
-                            child: TextField(
-                              controller: pnflController,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.only(top: 0, bottom: 9),
-                                suffix: GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: 19,
-                                    height: 19,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(19),
-                                      border: Border.all(
-                                          color:
-                                              Color.fromRGBO(49, 59, 108, 0.5),
-                                          style: BorderStyle.solid,
-                                          width: 2),
-                                    ),
-                                    child: Text(
-                                      "?",
-                                      style: TextStyle(
-                                        fontFamily: "Gilroy",
-                                        fontSize: 13,
-                                        color: Color.fromRGBO(49, 59, 108, 0.5),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                            child: Stack(
+                              alignment: Alignment.centerRight,
+                              children: [
+                                TextField(
+                                  controller: pnflController,
+                                  maxLines: 1,
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        EdgeInsets.only(top: 0, bottom: 9),
+ 
+                                    border: InputBorder.none,
+                                    hintText: "Введите ПИНФЛ",
+                                    hintStyle: Theme.of(context).textTheme.display1,
                                   ),
                                 ),
-                                border: InputBorder.none,
-                                hintText: "Введите ПНФЛ",
-                                hintStyle: Theme.of(context).textTheme.display1,
-                              ),
+                                InkWell(
+                                    onTap: () async {
+                                      final res = await Navigator.push(context, MaterialPageRoute(builder: (context) => CameraScreen()));
+                                      if (res != null) {
+                                        setState(() {
+                                          pnflController.text = res.personalNumber;
+                                          seriesController.text = res.documentNumber;
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                    width: 50,
+                                    height: 60,
+                                    alignment: Alignment.centerRight,
+                                    child: Container(
+                                      width: 20,
+                                      height: 20,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(19),
+                                        border: Border.all(
+                                            color:
+                                                Color.fromRGBO(49, 59, 108, 0.5),
+                                            style: BorderStyle.solid,
+                                            width: 2),
+                                      ),
+                                      child:Text(
+                                        "?",
+                                        style: TextStyle(
+                                          fontFamily: "Gilroy",
+                                          fontSize: 13,
+                                          color: Color.fromRGBO(49, 59, 108, 0.5),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    )
+                                  ),
+                                ),
+                              ]
                             ),
                           ),
                         ],

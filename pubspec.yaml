@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  flutter_mrz_scanner: ^1.0.0+3
+ # flutter_mobile_vision: ^0.1.4+1
   flutter:
     sdk: flutter
 
