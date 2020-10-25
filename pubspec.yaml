@@ -23,6 +23,10 @@ environment:
 dependencies:
   flutter_mrz_scanner: ^1.0.0+3
  # flutter_mobile_vision: ^0.1.4+1
+  camera: ^0.5.8+9
+  image: ^2.1.18
+  firebase_ml_vision: ^0.9.7
+  firebase_core: ^0.5.0+1
   flutter:
     sdk: flutter
 

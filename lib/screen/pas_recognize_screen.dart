@@ -4,6 +4,8 @@ import '../widget/default_button.dart';
 import '../widget/default_input.dart';
 import '../widget/main_text.dart';
 import "camera_page.dart";
+import "android_camera.dart";
+import 'dart:io';
  
 class PasRecognizeScreen extends StatefulWidget {
   static const routeName = "/register-pass-recognize";
@@ -86,7 +88,9 @@ class _PasRecognizeScreenState extends State<PasRecognizeScreen> {
                                 ),
                                 InkWell(
                                     onTap: () async {
-                                      final res = await Navigator.push(context, MaterialPageRoute(builder: (context) => CameraScreen()));
+                                      final res = await Navigator.push(context, MaterialPageRoute(
+                                        builder: (context) => Platform.isAndroid ? AndroidCameraPage() : CameraScreen())
+                                      );
                                       if (res != null) {
                                         setState(() {
                                           pnflController.text = res.personalNumber;

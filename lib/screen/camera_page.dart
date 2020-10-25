@@ -21,7 +21,11 @@ class _CameraScreenState extends State<CameraScreen> {
       this.controller = controller;
  
       controller.onParsed = (result) async {
+        if (!isParsed) {
+        isParsed = true;
+        controller.stopPreview();
         Navigator.pop(context, result);
+      }
       };
     controller.onError = (error) => {showDialog<void>(
         context: context,
