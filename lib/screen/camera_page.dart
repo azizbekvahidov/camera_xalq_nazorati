@@ -59,6 +59,13 @@ class _CameraScreenState extends State<CameraScreen> {
             MRZScanner(
               onControllerCreated: _onControllerCreated
             ),
+             Container(
+                  width: MediaQuery.of(context).size.width,
+                   height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -72,7 +79,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   height: 50,
                   margin: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.25),
+                    color: Colors.grey.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(5)
                   ),
                 ),
